@@ -11,6 +11,21 @@ export function createRangeSlider({
     return null;
   }
 
+  const setActiveHandle = (handle) => {
+    if (handle === "min") {
+      minInput.style.zIndex = "2";
+      maxInput.style.zIndex = "1";
+    } else if (handle === "max") {
+      minInput.style.zIndex = "1";
+      maxInput.style.zIndex = "2";
+    }
+  };
+
+  const downEvents = ["pointerdown", "mousedown", "touchstart"];
+
+  const handleMinPointerDown = () => setActiveHandle("min");
+  const handleMaxPointerDown = () => setActiveHandle("max");
+
   const parseNumber = (value) => {
     const num = Number(value);
     return Number.isFinite(num) ? num : 0;
@@ -68,6 +83,11 @@ export function createRangeSlider({
   minInput.addEventListener("change", handleChange);
   maxInput.addEventListener("change", handleChange);
 
+  downEvents.forEach((eventName) => {
+    minInput.addEventListener(eventName, handleMinPointerDown);
+    maxInput.addEventListener(eventName, handleMaxPointerDown);
+  });
+
   const setBounds = (minBound, maxBound) => {
     minInput.min = String(minBound);
     minInput.max = String(maxBound);
@@ -93,6 +113,11 @@ export function createRangeSlider({
     maxInput.removeEventListener("input", handleInput);
     minInput.removeEventListener("change", handleChange);
     maxInput.removeEventListener("change", handleChange);
+
+    downEvents.forEach((eventName) => {
+      minInput.removeEventListener(eventName, handleMinPointerDown);
+      maxInput.removeEventListener(eventName, handleMaxPointerDown);
+    });
   };
 
   return {
