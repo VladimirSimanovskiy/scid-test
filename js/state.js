@@ -1,7 +1,11 @@
 export const STATE = {
   users: [],
-  filterAdultsOnly: false,
-  sortBy: "none",
+  sort: {
+    lastName: "off",
+    age: "off",
+  },
+  ageMin: null,
+  ageMax: null,
 };
 
 const USERS_STORAGE_KEY = "users-with-photos";

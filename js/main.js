@@ -1,4 +1,6 @@
 import { setupControls } from "./dom.js";
+import { initAgeFilter } from "./ageFilter.js";
+import { initTableSorting } from "./tableSort.js";
 import { loadUsers } from "./api.js";
 
 async function loadLayout() {
@@ -29,6 +31,14 @@ async function loadLayout() {
 
 document.addEventListener("DOMContentLoaded", async () => {
   await loadLayout();
+
+  // Инициализируем lucide icons
+  if (window.lucide && typeof window.lucide.createIcons === "function") {
+    window.lucide.createIcons();
+  }
+
   setupControls();
+  initAgeFilter();
+  initTableSorting();
   loadUsers();
 });

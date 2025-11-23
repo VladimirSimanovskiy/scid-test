@@ -1,7 +1,7 @@
 import { getElements } from "./dom.js";
 import { getPreparedUsers } from "./dataProcessing.js";
 import { STATE, saveUsersToStorage } from "./state.js";
-import { createAvatarCell } from "./components/avatar.js";
+import { createAvatarCell } from "./components/avatar/avatar.js";
 
 function handleUserPhotoChange(userId, photoUrl) {
   STATE.users = STATE.users.map((user) =>
@@ -42,11 +42,11 @@ export function render() {
       })
     );
 
-    // Имя
-    tr.appendChild(createTextCell(user.firstName));
-
     // Фамилия
     tr.appendChild(createTextCell(user.lastName));
+
+    // Имя
+    tr.appendChild(createTextCell(user.firstName));
 
     // Возраст
     tr.appendChild(createTextCell(user.age != null ? String(user.age) : ""));

@@ -7,9 +7,35 @@
       <thead>
         <tr>
           <th>Фото</th>
+          <th>
+            <button
+              class="table__sort-button"
+              type="button"
+              data-sort-key="lastName"
+            >
+              <span class="table__sort-label">Фамилия</span>
+              <i
+                class="table__sort-icon"
+                data-lucide="arrow-up-down"
+                aria-hidden="true"
+              ></i>
+            </button>
+          </th>
           <th>Имя</th>
-          <th>Фамилия</th>
-          <th>Возраст</th>
+          <th>
+            <button
+              class="table__sort-button"
+              type="button"
+              data-sort-key="age"
+            >
+              <span class="table__sort-label">Возраст</span>
+              <i
+                class="table__sort-icon"
+                data-lucide="arrow-up-down"
+                aria-hidden="true"
+              ></i>
+            </button>
+          </th>
           <th>Email</th>
         </tr>
       </thead>

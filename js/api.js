@@ -1,10 +1,12 @@
 import { STATE, loadUsersFromStorage, saveUsersToStorage } from "./state.js";
 import { render } from "./render.js";
+import { setAgeFilterBoundsFromUsers } from "./ageFilter.js";
 
 export async function loadUsers() {
   const stored = loadUsersFromStorage();
   if (stored) {
     STATE.users = stored;
+    setAgeFilterBoundsFromUsers(STATE.users);
     render();
     return;
   }
@@ -22,6 +24,7 @@ export async function loadUsers() {
 
     STATE.users = data;
     saveUsersToStorage(STATE.users);
+    setAgeFilterBoundsFromUsers(STATE.users);
     render();
   } catch (error) {
     console.error(error);

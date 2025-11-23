@@ -1,24 +1,27 @@
-/* Аватар пользователя */
-
 .avatar {
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  width: 64px;
+  height: 64px;
+  line-height: 0;
 }
 
 .avatar__content {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 .avatar__image,
 .avatar__placeholder {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
   object-fit: cover;
   transition: filter 0.2s ease;
 }
@@ -28,6 +31,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 
 .avatar__initials {
@@ -40,7 +44,7 @@
 .avatar__overlay {
   position: absolute;
   inset: 0;
-  border-radius: 50%;
+  border-radius: 12px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.2s ease;

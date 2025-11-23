@@ -16,23 +16,23 @@
   {
     "id": 3,
     "firstName": "Алексей",
-    "lastName": "Сидоров",
+    "lastName": "Иванов",
     "age": 17,
-    "email": "alexey.sidorov@example.com"
+    "email": "alexey.ivanov@example.com"
   },
   {
     "id": 4,
     "firstName": "Елена",
-    "lastName": "Козлова",
+    "lastName": "Петрова",
     "age": 28,
-    "email": "elena.kozlova@example.com"
+    "email": "elena.petrova@example.com"
   },
   {
     "id": 5,
     "firstName": "Дмитрий",
-    "lastName": "Смирнов",
+    "lastName": "Новиков",
     "age": 16,
-    "email": "dmitry.smirnov@example.com"
+    "email": "dmitry.novikov@example.com"
   },
   {
     "id": 6,

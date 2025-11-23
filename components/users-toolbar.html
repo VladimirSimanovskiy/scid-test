@@ -4,20 +4,30 @@
 >
   <div class="controls">
     <div class="controls__group">
-      <label class="checkbox">
-        <input type="checkbox" id="ageFilter" />
-        <span>Показывать только пользователей старше 18 лет</span>
-      </label>
-    </div>
-
-    <div class="controls__group">
-      <label for="sortSelect" class="label">Сортировать по:</label>
-      <select id="sortSelect" class="select">
-        <option value="none">Без сортировки</option>
-        <option value="name">Имени (А‑Я)</option>
-        <option value="age-asc">Возрасту (по возрастанию)</option>
-        <option value="age-desc">Возрасту (по убыванию)</option>
-      </select>
+      <span class="label">Возраст:</span>
+      <span class="range__value range__value--min" id="ageRangeValueMin">0</span>
+      <div class="range" id="ageRange">
+        <div class="range__track">
+          <div class="range__progress" id="ageRangeProgress"></div>
+        </div>
+        <input
+          type="range"
+          id="ageRangeMin"
+          class="range__input"
+          min="0"
+          max="100"
+          value="0"
+        />
+        <input
+          type="range"
+          id="ageRangeMax"
+          class="range__input"
+          min="0"
+          max="100"
+          value="100"
+        />
+      </div>
+      <span class="range__value range__value--max" id="ageRangeValueMax">100</span>
     </div>
   </div>
 </section>
