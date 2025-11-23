@@ -19,13 +19,21 @@ export function createAvatarCell(user, { onPhotoChange, onPhotoRemove }) {
 
   const fileInput = createAvatarFileInput(onPhotoChange);
   const overlay = createAvatarActions({
-    onUploadClick: () => fileInput.click(),
-    onRemoveClick: onPhotoRemove,
+    onUploadClick: () => {
+      wrapper.classList.remove("avatar--active");
+      fileInput.click();
+    },
+    onRemoveClick: () => {
+      wrapper.classList.remove("avatar--active");
+      onPhotoRemove();
+    },
   });
 
   wrapper.appendChild(content);
   wrapper.appendChild(overlay);
   wrapper.appendChild(fileInput);
+
+  setupMobileAvatarTap(wrapper);
 
   td.appendChild(wrapper);
   return td;
@@ -97,4 +105,51 @@ function createAvatarActions({ onUploadClick, onRemoveClick }) {
   });
 
   return overlay;
+}
+
+function isMobilePointer() {
+  if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+    return false;
+  }
+
+  try {
+    const noHover = window.matchMedia("(hover: none)").matches;
+    const coarse = window.matchMedia("(pointer: coarse)").matches;
+    return noHover && coarse;
+  } catch {
+    return false;
+  }
+}
+
+function setupMobileAvatarTap(wrapper) {
+  if (!isMobilePointer()) return;
+
+  let isActive = false;
+
+  const open = () => {
+    wrapper.classList.add("avatar--active");
+    isActive = true;
+
+    const handleOutsideClick = (event) => {
+      if (!wrapper.contains(event.target)) {
+        wrapper.classList.remove("avatar--active");
+        isActive = false;
+      }
+    };
+
+    document.addEventListener("pointerdown", handleOutsideClick, { once: true });
+  };
+
+  wrapper.addEventListener(
+    "click",
+    (event) => {
+      // Первый тап только открывает иконки, не выполняя действие
+      if (!isActive) {
+        event.preventDefault();
+        event.stopPropagation();
+        open();
+      }
+    },
+    true
+  );
 }

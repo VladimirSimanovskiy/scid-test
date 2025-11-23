@@ -99,3 +99,26 @@
 .avatar__file-input {
   display: none;
 }
+
+/* Мобильные устройства: отключаем hover-поведение и включаем явное активное состояние */
+@media (hover: none) and (pointer: coarse) {
+  .avatar:hover .avatar__overlay {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .avatar:hover .avatar__image,
+  .avatar:hover .avatar__placeholder {
+    filter: none;
+  }
+
+  .avatar.avatar--active .avatar__overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .avatar.avatar--active .avatar__image,
+  .avatar.avatar--active .avatar__placeholder {
+    filter: brightness(0.7);
+  }
+}

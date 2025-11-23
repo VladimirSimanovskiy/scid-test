@@ -50,7 +50,7 @@
   box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.25);
   pointer-events: auto;
   cursor: pointer;
-  margin-top: calc((4px - 14px) / 2); /* выравниваем центр круга по центру линии */
+  margin-top: calc((4px - 14px) / 2);
 }
 
 .range__input::-moz-range-thumb {
@@ -62,7 +62,7 @@
   box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.25);
   pointer-events: auto;
   cursor: pointer;
-  margin-top: calc((4px - 14px) / 2); /* Firefox */
+  margin-top: calc((4px - 14px) / 2);
 }
 
 .range__input::-webkit-slider-runnable-track {
@@ -76,9 +76,9 @@
 }
 
 .range__value {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--color-text-secondary);
-  min-width: 32px;
+  min-width: 14px;
 }
 
 .range__value--min {
