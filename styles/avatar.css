@@ -1,0 +1,97 @@
+/* Аватар пользователя */
+
+.avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.avatar__content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar__image,
+.avatar__placeholder {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: filter 0.2s ease;
+}
+
+.avatar__placeholder {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar__initials {
+  color: var(--color-white);
+  font-weight: 600;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.avatar__overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.avatar:hover .avatar__overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.avatar:hover .avatar__image,
+.avatar:hover .avatar__placeholder {
+  filter: brightness(0.7);
+}
+
+.avatar__icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.avatar__icon--upload {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+}
+
+.avatar__icon--remove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+
+.avatar__icon--upload::before {
+  content: "⇪";
+  font-size: 14px;
+}
+
+.avatar__icon--remove::before {
+  content: "✕";
+  font-size: 14px;
+}
+
+.avatar__file-input {
+  display: none;
+}

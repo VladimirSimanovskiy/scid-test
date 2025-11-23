@@ -1,0 +1,47 @@
+/* Панель фильтрации и сортировки */
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 16px;
+  padding: 16px;
+  background-color: var(--color-bg-card);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+}
+
+.controls__group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  color: var(--color-text-primary);
+}
+
+.checkbox input {
+  width: 16px;
+  height: 16px;
+}
+
+.label {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+.select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-white);
+  font-size: 14px;
+}
+
+
