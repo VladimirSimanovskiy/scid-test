@@ -1,13 +1,11 @@
-import { getElements } from "./dom.js";
+import { getElements } from "../../dom.js";
 import { getPreparedUsers } from "./dataProcessing.js";
-import { STATE, saveUsersToStorage } from "./state.js";
-import { createAvatarCell } from "./components/avatar/avatar.js";
+import { STATE } from "./state/core.js";
+import { updateUserPhoto } from "./state/users.js";
+import { createAvatarCell } from "../../components/avatar/avatar.js";
 
 function handleUserPhotoChange(userId, photoUrl) {
-  STATE.users = STATE.users.map((user) =>
-    user.id === userId ? { ...user, photoUrl } : user
-  );
-  saveUsersToStorage(STATE.users);
+  updateUserPhoto(userId, photoUrl);
   render();
 }
 
@@ -22,7 +20,11 @@ export function render() {
   if (!tbody || !emptyState) return;
 
   tbody.innerHTML = "";
-  const users = getPreparedUsers();
+  const users = getPreparedUsers(STATE.users, {
+    ageMin: STATE.ageMin,
+    ageMax: STATE.ageMax,
+    sort: STATE.sort,
+  });
 
   if (users.length === 0) {
     emptyState.hidden = false;
@@ -54,6 +56,10 @@ export function render() {
     // Email
     tr.appendChild(createTextCell(user.email));
 
+    tr.setAttribute("data-user-id", String(user.id));
+
     tbody.appendChild(tr);
   });
 }
+
+

@@ -1,13 +1,3 @@
-export const STATE = {
-  users: [],
-  sort: {
-    lastName: "off",
-    age: "off",
-  },
-  ageMin: null,
-  ageMax: null,
-};
-
 const USERS_STORAGE_KEY = "users-with-photos";
 
 export function loadUsersFromStorage() {
@@ -29,3 +19,5 @@ export function saveUsersToStorage(users) {
     // Игнорируем ошибки сохранения (например, приватный режим)
   }
 }
+
+

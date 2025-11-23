@@ -1,18 +1,40 @@
-import { STATE, loadUsersFromStorage, saveUsersToStorage } from "./state.js";
-import { render } from "./render.js";
-import { setAgeFilterBoundsFromUsers } from "./ageFilter.js";
+import { loadUsersFromStorage } from "./features/users/state/storage.js";
+import { setUsers } from "./features/users/state/users.js";
+import { setAgeFilterBounds } from "./features/users/state/filters.js";
+import { PATHS } from "./config/constants.js";
+
+function computeAgeBounds(users) {
+  if (!Array.isArray(users) || users.length === 0) {
+    return { minAge: null, maxAge: null };
+  }
+
+  const ages = users
+    .map((u) => Number(u.age))
+    .filter((age) => Number.isFinite(age));
+
+  if (ages.length === 0) {
+    return { minAge: null, maxAge: null };
+  }
+
+  const minAge = Math.min(...ages);
+  const maxAge = Math.max(...ages);
+
+  return { minAge, maxAge };
+}
 
 export async function loadUsers() {
   const stored = loadUsersFromStorage();
   if (stored) {
-    STATE.users = stored;
-    setAgeFilterBoundsFromUsers(STATE.users);
-    render();
-    return;
+    setUsers(stored, { persist: false });
+    const { minAge, maxAge } = computeAgeBounds(stored);
+    if (minAge != null && maxAge != null) {
+      setAgeFilterBounds({ min: minAge, max: maxAge });
+    }
+    return { bounds: { minAge, maxAge } };
   }
 
   try {
-    const response = await fetch("users.json");
+    const response = await fetch(PATHS.usersJson);
     if (!response.ok) {
       throw new Error("Failed to load users");
     }
@@ -22,16 +44,14 @@ export async function loadUsers() {
       throw new Error("users format is invalid");
     }
 
-    STATE.users = data;
-    saveUsersToStorage(STATE.users);
-    setAgeFilterBoundsFromUsers(STATE.users);
-    render();
+    setUsers(data);
+    const { minAge, maxAge } = computeAgeBounds(data);
+    if (minAge != null && maxAge != null) {
+      setAgeFilterBounds({ min: minAge, max: maxAge });
+    }
+    return { bounds: { minAge, maxAge } };
   } catch (error) {
     console.error(error);
-    const emptyState = document.getElementById("emptyState");
-    if (emptyState) {
-      emptyState.hidden = false;
-      emptyState.textContent = "Не удалось загрузить список пользователей.";
-    }
+    throw error;
   }
 }
